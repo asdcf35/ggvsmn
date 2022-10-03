@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css"
+    />
+  </head>
+  <body>
+    <h1 class="title" style="text-align: center">Google Lens vs MobileNet</h1>
+    <div>
+      <ol id="GGvsMN">
+        <li id="1">
+          <img src="pictures/bottle.jpg" alt="" id="image1" />
+          <p id="googlelens1"></p>
+          <p id="mobilenet1"></p>
+        </li>
+        <li id="2">
+          <img src="pictures/fan.jpg" alt="" id="image2" />
+          <p id="googlelens2"></p>
+          <p id="mobilenet2"></p>
+        </li>
+        <li id="3">
+          <img src="pictures/glass.webp" alt="" id="image3" />
+          <p id="googlelens3"></p>
+          <p id="mobilenet3"></p>
+        </li>
+        <li id="4">
+          <img src="pictures/hanger.jpg" alt="" id="image4" />
+          <p id="googlelens4"></p>
+          <p id="mobilenet4"></p>
+        </li>
+        <li id="5">
+          <img src="pictures/pen.webp" alt="" id="image5" />
+          <p id="googlelens5"></p>
+          <p id="mobilenet5"></p>
+        </li>
+        <li id="6">
+          <img src="pictures/pencil.jpg" alt="" id="image6" />
+          <p id="googlelens6"></p>
+          <p id="mobilenet6"></p>
+        </li>
+        <li id="7">
+          <img src="pictures/pillow.jpg" alt="" id="image7" />
+          <p id="googlelens7"></p>
+          <p id="mobilenet7"></p>
+        </li>
+        <li id="8">
+          <img src="pictures/shirt.jpg" alt="" id="image8" />
+          <p id="googlelens8"></p>
+          <p id="mobilenet8"></p>
+        </li>
+        <li id="9">
+          <img src="pictures/soap.webp" alt="" id="image9" />
+          <p id="googlelens9"></p>
+          <p id="mobilenet9"></p>
+        </li>
+        <li id="10">
+          <img src="pictures/spoon.jpg" alt="" id="image10" />
+          <p id="googlelens10"></p>
+          <p id="mobilenet10"></p>
+        </li>
+      </ol>
+    </div>
+  </body>
+  <script>
+    // setting up our variables that we need for everything
+    const namesOfPictures = [
+      "bottle.jpg",
+      "fan.jpg",
+      "glass.webp",
+      "hanger.jpg",
+      "pen.webp",
+      "pencil.jpg",
+      "pillow.jpg",
+      "shirt.jpg",
+      "soap.webp",
+      "spoon.jpg",
+    ];
+    const googleLens = [];
+    let classifier = ml5.imageClassifier("MobileNet", () => {
+      console.log("Model Loaded");
+    });
+    /**
+     * @function MobileNetClassify
+     */
+    function MobileNetClassify(object) {
+      let res = "";
+      classifier.classify(object, (err, results) => {
+        if (err) {
+          console.error(err);
+        }
+       res = results[0].label;
+      });
+      return res;
+    }
+    const $ = (selectors) => document.querySelector(selectors);
+    ggvsmn = $("#GGvsMN");
+    var i;
+    let MobileNetClassifed = []
+    
+    for (i = 0; i++; i <= 10) {
+      ggvsmn.querySelector(
+        `#googlelens${i}`
+      ).innerHTML = `Google Lens: ${googleLens[i]}`;
+      ggvsmn.querySelector(`#mobilenet${i}`).innerHTML = "hi";
+    }
+  </script>
+</html>
