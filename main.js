@@ -31,8 +31,3 @@ function MobileNetClassify(object){
 const $ = selectors => document.querySelector(selectors);
 ggvsmn = $("#GGvsMN")
 var i;
-for(i=0; i++; i<=10){
-  ggvsmn.querySelector(`#googlelens${i}`).innerHTML = `Google Lens: ${googleLens[i]}`;
-  ggvsmn.querySelector(`#mobilenet${i}`).innerHTML = MobileNetClassify($(`image${i}`));
-};
-
